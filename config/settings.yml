@@ -1,0 +1,57 @@
+# Configurações gerais do projeto
+project:
+  name: YOLOv8 Training Project
+  version: 0.1.0
+  description: Projeto para treinamento de modelos YOLOv8 com datasets do Roboflow
+
+# Configurações de ambiente
+environment:
+  use_gpu: true
+  batch_size: 16
+  num_workers: 4
+  seed: 42
+
+# Configurações de caminhos
+paths:
+  data_dir: Dataset_roboflow
+  processed_data_dir: Dataset_roboflow/processed
+  models_dir: models
+  training_results_dir: models/training_results
+  logs_dir: logs
+
+# Configurações do Roboflow
+roboflow:
+  api_key: ${ROBOFLOW_API_KEY}
+  workspace: ${ROBOFLOW_WORKSPACE}
+  project: ${ROBOFLOW_PROJECT}
+  version: ${ROBOFLOW_VERSION}
+  format: yolov8
+
+# Configurações de treinamento
+training:
+  model_type: yolov8n.pt  # ou yolov8s.pt, yolov8m.pt, yolov8l.pt, yolov8x.pt
+  epochs: 50
+  image_size: 640
+  patience: 10
+  learning_rate: 0.01
+  weight_decay: 0.0005
+  save_period: 5
+  metrics:
+    - map50-95
+    - precision
+    - recall
+    - f1-score
+
+# Configurações de avaliação
+evaluation:
+  iou_threshold: 0.5
+  conf_threshold: 0.25
+  max_detections: 300
+  
+# Configurações de inferência
+inference:
+  conf_threshold: 0.3
+  iou_threshold: 0.45
+  max_detections: 100
+  save_results: true
+  visualize: true 
